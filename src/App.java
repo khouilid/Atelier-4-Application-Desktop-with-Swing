@@ -17,7 +17,9 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent e) {
                 text(area,tips());
-                window.setBackground(Color.red);
+                Color color = color();
+                window.getContentPane().setBackground(color);
+                btn_1.setForeground(color);
             }
         });
     }
@@ -25,6 +27,7 @@ public class App {
     private void createUIComponents() {
         window = new JFrame("Windows");
         window.setSize(500, 400);
+
         window.setLayout(null);
         window.setVisible(true);
     }
@@ -33,7 +36,7 @@ public class App {
         String txt = "Montrer un autre fait".toUpperCase();
         this.btn_1 = new JButton(txt);
         btn_1.setBounds(110, 300, 300, 40);
-        btn_1.setBackground(Color.ORANGE);
+        btn_1.setBackground(Color.BLUE);
         btn_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         btn_1.setBorderPainted(false);
         window.add(btn_1);
@@ -57,14 +60,26 @@ public class App {
 
     private String tips() {
         String[] tips = {
-                         "Babies have around 100 more bones than adults",
-                         "The Eiffel Tower can be 15 cm taller during the summer",
-                         "20% of Earth’s oxygen is produced by the Amazon rainforest"
+                         "<html><h2>Babies have around 100 more bones than adults</h2></html>",
+                         "<html><h2>The Eiffel Tower can be 15 cm taller during the summer</h2></html>",
+                         "<html><h2>20% of Earth’s oxygen is produced by the Amazon rainforest</h2></html>"
                         };
+
+        return tips[getRandom()];
+    }
+
+
+    private Color color(){
+        Color[] clr = {Color.RED, Color.ORANGE, Color.WHITE};
+        return  clr[getRandom()];
+
+    }
+
+
+    private int getRandom(){
         Random r = new Random();
         int low = 0;
         int high = 3;
-        int result = r.nextInt(high - low) + low;
-        return tips[result];
+        return r.nextInt(high - low) + low;
     }
 }
